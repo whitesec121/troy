@@ -14,6 +14,8 @@
 </pre>
   <br>
   <a href="./info.php" >Info</a>
+  <br>
+  <a href="./phpbash.php" >phpbash</a>
 </body>
 <script>document.getElementById("cmd").focus();</script>
 </html>
