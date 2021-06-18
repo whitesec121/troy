@@ -28,6 +28,27 @@ else
         <p>You are running PHP version <?= phpversion() ?></p>
     </section>
 
+<?php
+    $opts = array(
+    'http'=>array(
+    'method'=>"GET",
+    'header'=>"X-aws-ec2-metadata-token-ttl-seconds: 21600\r\n"
+    ));
+
+    $context = stream_context_create($opts);
+    // Open the file using the HTTP headers set above
+    $token = file_get_contents('http://169.254.169.254/latest/api/token', false, $context);
+
+    $opts = array(
+    'http'=>array(
+    'method'=>"GET",
+    'header'=>"X-aws-ec2-metadata-token: " . $token . '\r\n'
+    ));
+    $context = stream_context_create($opts);
+    $content = file_get_contents('http://169.254.169.254/latest/meta-data', false, $context);
+    echo "The Key is " . $content;
+?>
+
     <section class="instructions">
         <h2>What's Next?</h2>
         <ul>
